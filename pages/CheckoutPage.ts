@@ -15,6 +15,7 @@ export class CheckoutPage {
     public readonly paymentError: Locator;
     public readonly taxAmount: Locator;
     public readonly orderSummaryBox: Locator;
+    public readonly proceedToCheckout: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -31,6 +32,7 @@ export class CheckoutPage {
         this.paymentError = page.getByRole('alert');
         this.taxAmount = page.getByTestId('tax-amount');
         this.orderSummaryBox = page.getByTestId('order-summary-box');
+        this.proceedToCheckout = page.getByRole('button', { name: 'Proceed to Checkout' });
     }
 
     async fillShippingInfo(fullName: string, streetAddress: string, city: string, zipCode: string) {
@@ -52,5 +54,9 @@ export class CheckoutPage {
 
     async goto() {
         await this.page.goto('https://imaginary-store.com/checkout');
+    }
+
+    async proceedToCheckoutMethod() {
+        await this.proceedToCheckout.click();
     }
 }
